@@ -126,6 +126,7 @@ public class SocialController {
 	@RequestMapping(value="/myMessages", method=RequestMethod.GET)
 	public ModelAndView myMessageList(HttpServletRequest req) {
 		//
+		
 		SessionManager manager = new SessionManager(req);
 		String userId = manager.getLoginId();
 		User user = userService.findUser(userId);
