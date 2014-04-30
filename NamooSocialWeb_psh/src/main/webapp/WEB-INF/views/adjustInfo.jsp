@@ -12,6 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
+<script src="${ctx}/resources/js/adjustInfo.js"></script>
 <style type="text/css">
 @import
 url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
@@ -98,7 +99,8 @@ url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
 						</div>
 
 						<hr>
-						<h3>팔로우 추천</h3>
+						<h3 id="recommendFollowing">팔로우 추천</h3>
+						<!-- 
 						<c:forEach var="notFollowing" items="${notFollowings}">
 							<h5>
 								<i class="glyphicon glyphicon-user"></i>
@@ -110,6 +112,7 @@ url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
 								onclick="location.href='${ctx}/follow/${notFollowing.userId}'"
 								value="팔로우" class="btn btn-default" />
 						</c:forEach>
+						 -->
 						<hr>
 					</div>
 				</div>
@@ -142,11 +145,12 @@ url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
 				<div class="panel">
 					<div class="panel-heading"
 						style="background-color: #111; color: #fff;">Top Stories</div>
-					<div class="panel-body">
+					<div class="panel-body" id="allMessages">
+					<!-- 
 						<c:forEach var="message" items="${messages}">
 							<div class="row">
 								<div class="col-md-8">
-									<!--<img src="/assets/example/bg1.jpg" class="img-responsive">-->
+									//<img src="/assets/example/bg1.jpg" class="img-responsive">
 									<h4>${message.writer.name}</h4>
 									&nbsp;
 									<h5>${message.writer.userId}&nbsp;${message.reg_dt}</h5>
@@ -157,6 +161,7 @@ url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
 							</div>
 							<hr>
 						</c:forEach>
+					 -->
 					</div>
 					<!--/panel-body-->
 

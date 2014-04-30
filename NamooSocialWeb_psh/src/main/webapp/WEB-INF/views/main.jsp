@@ -101,14 +101,14 @@
 
 						<hr>
 						<h3 id ="recommendFollowing">팔로우 추천</h3>
-						
+						<!-- 
 						<c:forEach var="notFollowing" items="${notFollowings}">
 							<i class="glyphicon glyphicon-user"></i>
 							<p>${notFollowing.name}&nbsp;&nbsp;&nbsp;${notFollowing.userId}</p>&nbsp;
 							<input type="button" onclick="location.href='${ctx}/follow/${notFollowing.userId}'"
 							value="팔로우" class="btn btn-default" /><br/>
 						</c:forEach>
-						
+						 -->
 						<hr>
 					</div>
 				</div>

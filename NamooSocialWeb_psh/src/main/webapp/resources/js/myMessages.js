@@ -15,8 +15,7 @@ $(document).ready(function(){
 			html += "<h5><i class='glyphicon glyphicon-user'></i></h5>&nbsp;";
 			html += "<p><h4>" + notFollowing.name + "</h4>&nbsp;";
 			html += "<h5>" + notFollowing.userId + "</h5></p>";
-			html += "<input type='button' onclick='location.href='${ctx}/follow/" + notFollowing.userId + "'' value='팔로우' class='btn btn-default' />";
-//			html += "";
+			html += "<input type='button' onclick='location.href=" + "'" + nsjs.ctx + "/follow/" + notFollowing.userId + "'" + "'" + " value='팔로우' class='btn btn-default' />";
 		}
 		$("#recommendFollowing").append(html);
 	}
@@ -36,9 +35,6 @@ $(document).ready(function(){
 			html += "<button class='btn btn-default'>More</button>&nbsp;&nbsp<input type='checkbox'/>";
 			html += "</div></div><hr>";
 		}
-		
 		$("#myMessages").append(html);
-		
 	}
-	
 });

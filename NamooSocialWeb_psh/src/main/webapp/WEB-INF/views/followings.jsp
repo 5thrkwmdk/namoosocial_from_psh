@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
@@ -12,6 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
+<script src="${ctx}/resources/js/followings.js"></script>
 <style type="text/css">
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
@@ -100,7 +100,8 @@
 						</div>
 
 						<hr>
-						<h3>팔로우 추천</h3>
+						<h3 id ="recommendFollowing">팔로우 추천</h3>
+						<!-- 
 						<c:forEach var="notFollowing" items="${notFollowings}">
 							<h5>
 								<i class="glyphicon glyphicon-user"></i>
@@ -112,6 +113,7 @@
 								onclick="location.href='${ctx}/follow/${notFollowing.userId}'"
 								value="팔로우" class="btn btn-default" />
 						</c:forEach>
+						 -->
 						<hr>
 					</div>
 				</div>
@@ -153,7 +155,8 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id = "followingList">
+									<!-- 
 									<c:forEach var="following" items="${followings}">
 										<tr>
 											<td>${following.userId}</td>
@@ -163,6 +166,7 @@
 													class="btn btn-default btn-sm">언팔로우</button></td>
 										</tr>
 									</c:forEach>
+									 -->
 								</tbody>
 							</table>
 

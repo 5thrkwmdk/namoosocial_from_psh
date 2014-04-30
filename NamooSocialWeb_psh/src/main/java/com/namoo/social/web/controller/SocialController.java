@@ -105,14 +105,29 @@ public class SocialController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		SessionManager manager = new SessionManager(req);
 		String userId = manager.getLoginId();
-		List<User> followings = userService.findAllFollowings(userId);
+		
 		User user = userService.findUser(userId);
+		
+		map.put("user", user);
+		
+		return new ModelAndView("/followings", map);
+	}
+	
+	@RequestMapping(value = "/flollowings2", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> followingsList2(HttpServletRequest req) {
+		//
+		Map<String, Object> map = new HashMap<String, Object>();
+		SessionManager manager = new SessionManager(req);
+		String userId = manager.getLoginId();
+		
+		List<User> followings = userService.findAllFollowings(userId);
 		List<User> notFollowings = userService.findAllUserExceptFollowings(userId);
 		
 		map.put("followings", followings);
-		map.put("user", user);
 		map.put("notFollowings", notFollowings);
-		return new ModelAndView("/followings", map);
+		
+		return map;
 	}
 	
 	@RequestMapping(value="/unfollow/{whom}", method=RequestMethod.GET)
@@ -126,12 +141,11 @@ public class SocialController {
 	@RequestMapping(value="/myMessages", method=RequestMethod.GET)
 	public ModelAndView myMessageList(HttpServletRequest req) {
 		//
-		
 		SessionManager manager = new SessionManager(req);
 		String userId = manager.getLoginId();
 		User user = userService.findUser(userId);
 		
-		return new ModelAndView("/main", "user", user);
+		return new ModelAndView("/myMessages", "user", user);
 	}
 	
 	@RequestMapping(value="/myMessagesList", method=RequestMethod.GET)

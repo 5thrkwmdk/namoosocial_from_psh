@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -92,14 +94,24 @@ public class UserController {
 		SessionManager manager = new SessionManager(req);
 		String userId = manager.getLoginId();
 		
-		List<Message> messages = msgService.showTimeLine(userId);
 		User user = service.findUser(userId);
+		map.put("user", user);
+
+		return new ModelAndView("/myInfo", map);
+	}
+	
+	@RequestMapping(value="/myInfo2", method=RequestMethod.GET) 
+	@ResponseBody
+	public Map<String, Object>myInfoFollowingList(HttpServletRequest req) {
+		//
+		Map<String, Object> map = new HashMap<String, Object>();
+		SessionManager manager = new SessionManager(req);
+		String userId = manager.getLoginId();
+		
 		List<User> notFollowings = service.findAllUserExceptFollowings(userId);
 		
-		map.put("messages", messages);
-		map.put("user", user);
 		map.put("notFollowings", notFollowings);
-		return new ModelAndView("/myInfo", map);
+		return map;
 	}
 	
 	@RequestMapping(value="/adjustInfo", method=RequestMethod.GET)
@@ -109,14 +121,26 @@ public class UserController {
 		SessionManager manager = new SessionManager(req);
 		String userId = manager.getLoginId();
 		
-		List<Message> messages = msgService.showTimeLine(userId);
 		User user = service.findUser(userId);
+		map.put("user", user);
+		
+		return new ModelAndView("/adjustInfo", map);
+	}
+	
+	@RequestMapping(value="/adjustInfo2", method=RequestMethod.GET)
+	public Map<String, Object> adjustInfo2(HttpServletRequest req) {
+		//
+		Map<String, Object> map = new HashMap<String, Object>();
+		SessionManager manager = new SessionManager(req);
+		String userId = manager.getLoginId();
+		
+		List<Message> messages = msgService.showTimeLine(userId);
 		List<User> notFollowings = service.findAllUserExceptFollowings(userId);
 		
 		map.put("messages", messages);
-		map.put("user", user);
 		map.put("notFollowings", notFollowings);
-		return new ModelAndView("/adjustInfo", map);
+		
+		return map;
 	}
 	
 	@RequestMapping(value="/adjust", method=RequestMethod.GET)

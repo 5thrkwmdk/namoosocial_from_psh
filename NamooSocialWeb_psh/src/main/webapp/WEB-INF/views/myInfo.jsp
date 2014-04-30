@@ -11,6 +11,7 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
+<script src="${ctx}/resources/js/myInfo.js"></script>
 <style type="text/css">
 /* custom theme + Bootstrap resets */
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400')
@@ -101,7 +102,8 @@
 						</div>
 
 						<hr>
-						<h3>팔로우 추천</h3>
+						<h3 id ="recommendFollowing">팔로우 추천</h3>
+						<!-- 
 						<c:forEach var="notFollowing" items="${notFollowings}">
 							<h5>
 								<i class="glyphicon glyphicon-user"></i>
@@ -113,6 +115,7 @@
 								onclick="location.href='${ctx}/follow/${notFollowing.userId}'"
 								value="팔로우" class="btn btn-default" />
 						</c:forEach>
+						 -->
 						<hr>
 					</div>
 				</div>
@@ -151,21 +154,21 @@
 								<label class="col-lg-2 control-label">사용자ID</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" placeholder="사용자ID" name="userId" value="${user.userId}">
+									<input type="text" class="form-control" readonly="readonly" placeholder="사용자ID" name="userId" value="${user.userId}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">이름</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" placeholder="이름" name="name" value="${user.name}">
+									<input type="text" class="form-control" readonly="readonly" placeholder="이름" name="name" value="${user.name}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">이메일</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" placeholder="이메일" name="email" value="${user.email}">
+									<input type="text" class="form-control" readonly="readonly" placeholder="이메일" name="email" value="${user.email}">
 								</div>
 							</div>
 							<div class="form-group">
