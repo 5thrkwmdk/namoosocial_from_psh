@@ -12,8 +12,8 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<%@ include file="/WEB-INF/views/common/common.jsp"%>
 <script src="${ctx}/resources/js/main.js"></script>
+<%@ include file="/WEB-INF/views/common/common.jsp"%>
 <style type="text/css">
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400');
 </style>

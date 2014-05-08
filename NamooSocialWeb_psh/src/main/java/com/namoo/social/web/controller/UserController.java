@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,13 +49,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(HttpServletRequest req, @RequestParam("userId") String loginId, @RequestParam("password") String password) {
+	@ResponseBody
+	public boolean login(HttpServletRequest req, String loginId, String password) {
 		//
 		SessionManager manager = new SessionManager(req);
 		if (manager.login(loginId, password)) {
-			return "redirect:/main";
+			return true;
 		}
-		return "/login";
+		return false;
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
@@ -147,6 +147,7 @@ public class UserController {
 	public String adjust(UserCommand command) {
 		//
 		service.adjustUser(command.getName(), command.getEmail(), command.getPassword());
+		
 		return "/myInfo";
 	}
 	
@@ -162,6 +163,7 @@ public class UserController {
 		
 		map.put("user", user);
 		map.put("notFollowings", notFollowings);
+		
 		return new ModelAndView("/withdrawal", map);
 	}
 	
@@ -170,27 +172,28 @@ public class UserController {
 		//
 		SessionManager manager = new SessionManager(req);
 		service.removeUser(manager.getLoginId());
+		
 		return "redirect:/login";
 	}
 	
 	//-----------------------------------------------------------------------------
-		//private method
+	//private method
+	
+	private void setupImage(User user, MultipartFile file) throws IOException {
+		//
+		if (file.isEmpty()) return;
 		
-		private void setupImage(User user, MultipartFile file) throws IOException {
-			//
-			if (file.isEmpty()) return;
-			
-			StringBuffer sb = new StringBuffer();
-			sb.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
-			sb.append(".");
-			sb.append(FilenameUtils.getExtension(file.getOriginalFilename()));
-			String saveFileName = sb.toString();
-			File saveFile = new File(imageRoot + saveFileName);
-			
-			FileCopyUtils.copy(file.getBytes(), saveFile);
-			System.out.println("image saved in " + saveFile.getCanonicalPath());
-			
-			String contentType = file.getContentType();
-			user.setProfileImage(new ImageFile(contentType, saveFileName));
-		}
+		StringBuffer sb = new StringBuffer();
+		sb.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
+		sb.append(".");
+		sb.append(FilenameUtils.getExtension(file.getOriginalFilename()));
+		String saveFileName = sb.toString();
+		File saveFile = new File(imageRoot + saveFileName);
+		
+		FileCopyUtils.copy(file.getBytes(), saveFile);
+		System.out.println("image saved in " + saveFile.getCanonicalPath());
+		
+		String contentType = file.getContentType();
+		user.setProfileImage(new ImageFile(contentType, saveFileName));
+	}
 }
